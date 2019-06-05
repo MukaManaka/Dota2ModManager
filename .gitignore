@@ -1,0 +1,10 @@
+##############################
+## Folders                  ##
+##############################
+temp
+Resource
+Tools
+__pycache__
+.ipynb_checkpoints
+usr
+help
