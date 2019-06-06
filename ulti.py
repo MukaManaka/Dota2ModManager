@@ -2,9 +2,16 @@ import zipfile
 import hashlib
 import shutil
 import os 
-
+import re
 
 mod_dirnames = ['materials','models','panorama','particles','resource','soundevents','sounds']
+
+
+def find_ver(name):
+    rule = r'V(\d+\.\d+)'
+    st = re.findall(rule, name)[0]
+    return st
+    
 
 
 def zipextra(zipfilePath, rootDir = r'.\temp'):
@@ -63,4 +70,5 @@ def calcMD5(filepath):
 
 if __name__ == '__main__':
     # extractMod('.\\Resource\\ZIP\\Akemi homura replaced queen of pain V1.01.zip')
+    find_ver("Akemi homura replaced queen of pain V1.01.zip")
     pass
