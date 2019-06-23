@@ -6,6 +6,12 @@ import re
 
 mod_dirnames = ['materials','models','panorama','particles','resource','soundevents','sounds']
 
+error_index = 0 # 错误的个数
+
+# 非英文检测
+def unEngDetect(src, drt):
+    pass
+
 
 def find_ver(name):
     rule = r'V(\d+\.\d+)'
@@ -13,11 +19,12 @@ def find_ver(name):
     return st
     
 
-
+# 解压文件
 def zipextra(zipfilePath, rootDir = r'.\temp'):
     with zipfile.ZipFile(zipfilePath,'r') as file_zip:
         for file in file_zip.namelist():
             file_zip.extract(file, rootDir)
+            # print(file)
 
 
 def movedir(src, drt, replpath):
@@ -70,5 +77,5 @@ def calcMD5(filepath):
 
 if __name__ == '__main__':
     # extractMod('.\\Resource\\ZIP\\Akemi homura replaced queen of pain V1.01.zip')
-    find_ver("Akemi homura replaced queen of pain V1.01.zip")
+    zipextra('.\\Resource\\ZIP\\Akemi homura replaced queen of pain V1.01.zip')
     pass
