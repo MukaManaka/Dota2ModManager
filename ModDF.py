@@ -18,10 +18,26 @@ class DotaModManager(object):
         self.arg = arg
         self.columns = ['name', 'version', 'using', 'decompression',' hash', 'path', 'state']
         self.reset_dataframe()
-        # self.load_library()
+        self.dotapath = r"C:\SteamApp\steamapps\common\dota 2 beta"
+        self.load_library()
 
     def __str__(self):
         return str(self.dataframe)
+
+    # 使能mod
+    def enableMod(self, enable = True):
+        self.gipath = self.dotapath + r"\game\dota\gameinfo.gi"
+        with open(self.gipath, 'r') as f:
+            gifile = f.readlines()
+
+        if enable:
+            gifile[43] = "            Game                Reborn_Mods\n"    
+        else:
+            gifile[43] = "\n"
+
+        with open(self.gipath, 'w+') as f:
+            f.writelines(gifile)
+
 
     def reset_dataframe(self):
         self.dataframe = pd.DataFrame(columns = self.columns)
@@ -58,7 +74,7 @@ class DotaModManager(object):
 
 
 
-
+    # 清除所有Release
     def clear_resource(self):
         shutil.rmtree(r'.\Resource\Release')
         self.dataframe.iloc[:,3] = False
@@ -83,7 +99,7 @@ class DotaModManager(object):
 
         insertRow = pd.DataFrame([[_name, _version, _using, _decompression, _hash, _path, _state]], columns = self.columns)
         self.dataframe = self.dataframe.append(insertRow, ignore_index=True)
-
+    
 
     # 由index解压目录
     def exrract_index(self, indexes):
@@ -101,9 +117,7 @@ class DotaModManager(object):
 if __name__ == '__main__':
     dmm = DotaModManager()
 
-    dmm.clear_resource()
-    # dmm.add_resource('Akemi homura replaced queen of pain V1.01.zip', extract = True)
+    # dmm.clear_resource()
+    # dmm.auto_resource(extract = True)
     # dmm.save_library()
-    dmm.auto_resource(extract = True)
-    dmm.save_library()
     print(dmm)
