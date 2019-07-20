@@ -1,2 +1,3 @@
-# Dota2 Mod 管理器
-用于导入, 管理mod
+# Dota2 Mod Manager
+
+For import Dota2 mod
